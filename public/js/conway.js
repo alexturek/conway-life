@@ -1,4 +1,4 @@
-(function($) {
+(function($, _) {
   $(function() {
     var drawBoard = function(width, height) {
       $('#all-fields').empty();
@@ -12,6 +12,12 @@
         }).join('');
       $('#all-fields').html(cells);
     };
-    drawBoard(5, 5);
+
+    drawBoard(50, 20);
+
+    var ws       = new WebSocket('ws://' + window.location.host + '/client');
+    ws.onopen    = function()  { console.log('websocket opened'); };
+    ws.onclose   = function()  { console.log('websocket closed'); }
+    ws.onmessage = function(m) { console.log('websocket message: ' +  m.data); };
   })
-})(jQuery);
+})(jQuery, _);
